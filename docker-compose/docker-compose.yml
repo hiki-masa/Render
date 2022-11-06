@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  gcc-cpp-sample:
+    image: 'gcc:12.2'
+    container_name: render
+
+    volumes:
+      - ../src/:/app/src
+      - ../header/:/app/header/
+    working_dir: /app/src
+
+    tty: true
