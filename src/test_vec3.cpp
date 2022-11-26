@@ -21,19 +21,32 @@ int main() {
     assert(v3.normalize().x == 0.6 && v3.normalize().y == 0.8 && v3.normalize().z == 0.0);
     std::cout << "【テスト完了】正規化" << std::endl;
 
-    // ベクトル同士の演算
+    // マイナスのテスト
     Vec3 tmp;
+    tmp = -v2;
+    assert(tmp.x == -1 && tmp.y == -2 && tmp.z == -3);
+    std::cout << "【テスト完了】マイナス演算子" << std::endl;
+
+    // ベクトル同士の演算
     tmp = v1 + v2;
     assert(tmp.x == 6 && tmp.y == 7 && tmp.z == 8);
+    tmp += v2;
+    assert(tmp.x == 7 && tmp.y == 9 && tmp.z == 11);
     std::cout << "【テスト完了】ベクトル同士の加算" << std::endl;
     tmp = v1 - v2;
     assert(tmp.x == 4 && tmp.y == 3 && tmp.z == 2);
+    tmp -= v2;
+    assert(tmp.x == 3 && tmp.y == 1 && tmp.z == -1);
     std::cout << "【テスト完了】ベクトル同士の減算" << std::endl;
     tmp = v1 * v2;
     assert(tmp.x == 5 && tmp.y == 10 && tmp.z == 15);
+    tmp *= v2;
+    assert(tmp.x == 5 && tmp.y == 20 && tmp.z == 45);
     std::cout << "【テスト完了】ベクトル同士の乗算" << std::endl;
     tmp = v1 / v2;
     assert(tmp.x == 5 && tmp.y == 2.5 && tmp.z == 5.0 / 3);
+    tmp /= v2;
+    assert(tmp.x == 5 && tmp.y == 1.25 && tmp.z == 5.0 / 9);
     std::cout << "【テスト完了】ベクトル同士の除算" << std::endl;
 
     // ベクトルとスカラーの演算
@@ -41,21 +54,29 @@ int main() {
     assert(tmp.x == 2 && tmp.y == 3 && tmp.z == 4);
     tmp = 1 + v2;
     assert(tmp.x == 2 && tmp.y == 3 && tmp.z == 4);
+    tmp += 1;
+    assert(tmp.x == 3 && tmp.y == 4 && tmp.z == 5);
     std::cout << "【テスト完了】ベクトルとスカラーの加算" << std::endl;
     tmp = v2 - 1;
     assert(tmp.x == 0 && tmp.y == 1 && tmp.z == 2);
     tmp = 1 - v2;
     assert(tmp.x == 0 && tmp.y == -1 && tmp.z == -2);
+    tmp -= 1;
+    assert(tmp.x == -1 && tmp.y == -2 && tmp.z == -3);
     std::cout << "【テスト完了】ベクトルとスカラーの減算" << std::endl;
     tmp = v2 * 5;
     assert(tmp.x == 5 && tmp.y == 10 && tmp.z == 15);
     tmp = 5 * v2;
     assert(tmp.x == 5 && tmp.y == 10 && tmp.z == 15);
+    tmp *= 5;
+    assert(tmp.x == 25 && tmp.y == 50 && tmp.z == 75);
     std::cout << "【テスト完了】ベクトルとスカラーの乗算" << std::endl;
     tmp = v2 / 5;
     assert(tmp.x == 0.2 && tmp.y == 0.4 && tmp.z == 0.6);
     tmp = 5 / v2;
     assert(tmp.x == 5 && tmp.y == 2.5 && tmp.z == 5.0 / 3);
+    tmp /= 2;
+    assert(tmp.x == 2.5 && tmp.y == 1.25 && tmp.z == 5.0 / 6);
     std::cout << "【テスト完了】ベクトルとスカラーの除算" << std::endl;
 
     // 内積の計算

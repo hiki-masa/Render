@@ -20,86 +20,131 @@ class Vec3 {
         // ノルム値
         double norm() {
             return std::sqrt(x * x + y * y + z * z);
-        };
+        }
         
         // 正規化
         Vec3 normalize() {
             return Vec3(
-                this->x / norm(),
-                this->y / norm(),
-                this->z / norm()
+                x / norm(),
+                y / norm(),
+                z / norm()
             );
-        };
+        }
+
+        // マイナス演算
+        inline Vec3 operator- () {
+            return Vec3(-x, -y, -z);
+        }
+
+        // ベクトル同士の演算
+        inline Vec3 operator+ (const Vec3& v) const {
+            return Vec3(x + v.x, y + v.y, z + v.z);
+        }
+
+        inline Vec3 operator+= (const Vec3& v) {
+            x += v.x, y += v.y, z += v.z;
+            return *this;
+        }
+
+        inline Vec3 operator- (const Vec3& v) const {
+            return Vec3(x - v.x, y - v.y, z - v.z);
+        }
+
+        inline Vec3 operator-= (const Vec3& v) {
+            x -= v.x, y -= v.y, z -= v.z;
+            return *this;
+        }
+
+        inline Vec3 operator* (const Vec3& v) const {
+            return Vec3(x * v.x, y * v.y, z * v.z);
+        }
+
+        inline Vec3 operator*= (const Vec3& v) {
+            x *= v.x, y *= v.y, z *= v.z;
+            return *this;
+        }
+
+        inline Vec3 operator/ (const Vec3& v) const {
+            return Vec3(x / v.x, y / v.y, z / v.z);
+        }
+
+        inline Vec3 operator/= (const Vec3& v) {
+            x /= v.x, y /= v.y, z /= v.z;
+            return *this;
+        }
+
+        // ベクトルとスカラーの演算
+        inline Vec3 operator+ (const double s) {
+            return Vec3(x + s, y + s, z + s);
+        }
+
+        inline friend Vec3 operator+ (const double s, const Vec3& v) {
+            return Vec3(s + v.x, s + v.y, s + v.z);
+        }
+
+        inline Vec3 operator+= (const double s) {
+            x += s, y += s, z += s;
+            return *this;
+        }
+
+        inline Vec3 operator- (const double s) {
+            return Vec3(x - s, y - s, z - s);
+        }
+
+        inline friend Vec3 operator- (const double s, const Vec3& v) {
+            return Vec3(s - v.x, s - v.y, s - v.z);
+        }
+
+        inline Vec3 operator-= (const double s) {
+            x -= s, y -= s, z -= s;
+            return *this;
+        }
+
+        inline Vec3 operator* (const double s) {
+            return Vec3(x * s, y * s, z * s);
+        }
+
+        inline friend Vec3 operator* (const double s, const Vec3& v) {
+            return Vec3(s * v.x, s * v.y, s * v.z);
+        }
+
+        inline Vec3 operator*= (const double s) {
+            x *= s, y *= s, z *= s;
+            return *this;
+        }
+
+        inline Vec3 operator/ (const double s) {
+            return Vec3(x / s, y / s, z / s);
+        }
+
+        inline friend Vec3 operator/ (const double s, const Vec3& v) {
+            return Vec3(s / v.x, s / v.y, s / v.z);
+        }
+
+        inline Vec3 operator/= (const double s) {
+            x /= s, y /= s, z /= s;
+            return *this;
+        }
+
+        // 内積
+        inline friend double dot(const Vec3& v1, const Vec3& v2) {
+            return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
+        }
+
+        // 外積
+        inline friend Vec3 cross(const Vec3& v1, const Vec3& v2) {
+            return Vec3(
+                v1.y * v2.z - v1.z * v2.y,
+                v1.z * v2.x - v1.x * v2.z,
+                v1.x * v2.y - v1.y * v2.x
+            );
+        }
+
+        // コンソール出力
+        inline friend std::ostream& operator<<(std::ostream& stream, const Vec3& v) {
+            stream << "(" << v.x << ", " << v.y << ", " << v.z << ")";
+            return stream;
+        }
 };
-
-// ベクトル同士の演算
-inline Vec3 operator+ (const Vec3& v1, const Vec3& v2) {
-    return Vec3(v1.x + v2.x, v1.y + v2.y, v1.z + v2.z);
-}
-
-inline Vec3 operator- (const Vec3& v1, const Vec3& v2) {
-    return Vec3(v1.x - v2.x, v1.y - v2.y, v1.z - v2.z);
-}
-
-inline Vec3 operator* (const Vec3& v1, const Vec3& v2) {
-    return Vec3(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
-}
-
-inline Vec3 operator/ (const Vec3& v1, const Vec3& v2) {
-    return Vec3(v1.x / v2.x, v1.y / v2.y, v1.z / v2.z);
-}
-
-// ベクトルとスカラーの演算
-inline Vec3 operator+ (const Vec3& v, const double s) {
-    return Vec3(v.x + s, v.y + s, v.z + s);
-}
-
-inline Vec3 operator+ (const double s, const Vec3& v) {
-    return v + s;
-}
-
-inline Vec3 operator- (const Vec3& v, const double s) {
-    return Vec3(v.x - s, v.y - s, v.z - s);
-}
-
-inline Vec3 operator- (const double s, const Vec3& v) {
-    return Vec3(s - v.x, s - v.y, s - v.z);
-}
-
-inline Vec3 operator* (const Vec3& v, const double s) {
-    return Vec3(v.x * s, v.y * s, v.z * s);
-}
-
-inline Vec3 operator* (const double s, const Vec3& v) {
-    return v * s;
-}
-
-inline Vec3 operator/ (const Vec3& v, const double s) {
-    return Vec3(v.x / s, v.y / s, v.z / s);
-}
-
-inline Vec3 operator/ (const double s, const Vec3& v) {
-    return Vec3(s / v.x, s / v.y, s / v.z);
-}
-
-// 内積
-inline double dot(const Vec3& v1, const Vec3& v2) {
-    return v1.x * v2.x + v1.y * v2.y + v1.z * v2.z;
-}
-
-// 外積
-inline Vec3 cross(const Vec3& v1, const Vec3& v2) {
-    return Vec3(
-        v1.y * v2.z - v1.z * v2.y,
-        v1.z * v2.x - v1.x * v2.z,
-        v1.x * v2.y - v1.y * v2.x
-    );
-}
-
-// コンソール出力
-inline std::ostream& operator<<(std::ostream& stream, const Vec3& v) {
-    stream << "(" << v.x << ", " << v.y << ", " << v.z << ")";
-    return stream;
-}
 
 #endif
