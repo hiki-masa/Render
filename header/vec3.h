@@ -10,20 +10,20 @@ class Vec3 {
         double x, y, z;
 
         // コンストラクタ
-        Vec3()                                : x(.0), y(.0), z(.0) {};
-        Vec3(double _i)                       : x(_i), y(_i), z(_i) {};
-        Vec3(double _x, double _y, double _z) : x(_x), y(_y), z(_z) {};
+        Vec3()                                : x(.0), y(.0), z(.0) {}
+        Vec3(double _i)                       : x(_i), y(_i), z(_i) {}
+        Vec3(double _x, double _y, double _z) : x(_x), y(_y), z(_z) {}
 
         // デストラクタ
-        ~Vec3() {};
+        ~Vec3() {}
 
         // ノルム値
-        double norm() {
+        double norm() const {
             return std::sqrt(x * x + y * y + z * z);
         }
         
         // 正規化
-        Vec3 normalize() {
+        Vec3 normalize() const {
             return Vec3(
                 x / norm(),
                 y / norm(),
@@ -32,7 +32,7 @@ class Vec3 {
         }
 
         // マイナス演算
-        inline Vec3 operator- () {
+        inline Vec3 operator- () const {
             return Vec3(-x, -y, -z);
         }
 
@@ -74,7 +74,7 @@ class Vec3 {
         }
 
         // ベクトルとスカラーの演算
-        inline Vec3 operator+ (const double s) {
+        inline Vec3 operator+ (const double s) const {
             return Vec3(x + s, y + s, z + s);
         }
 
@@ -87,7 +87,7 @@ class Vec3 {
             return *this;
         }
 
-        inline Vec3 operator- (const double s) {
+        inline Vec3 operator- (const double s) const {
             return Vec3(x - s, y - s, z - s);
         }
 
@@ -100,7 +100,7 @@ class Vec3 {
             return *this;
         }
 
-        inline Vec3 operator* (const double s) {
+        inline Vec3 operator* (const double s) const {
             return Vec3(x * s, y * s, z * s);
         }
 
@@ -113,7 +113,7 @@ class Vec3 {
             return *this;
         }
 
-        inline Vec3 operator/ (const double s) {
+        inline Vec3 operator/ (const double s) const {
             return Vec3(x / s, y / s, z / s);
         }
 

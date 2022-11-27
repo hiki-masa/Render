@@ -5,10 +5,19 @@
 
 int main() {
     Vec3 o(1, 2, 3);
-    Vec3 d(1, 0, 0);
+    Vec3 d(10, 0, 0);
     Ray  r(o, d);
 
-    Vec3 tmp = r(5);
+    // コンストラクタのテスト
+    Vec3 tmp;
+    tmp = r.getOrigin();
+    assert(tmp.x == 1 && tmp.y == 2 && tmp.z == 3);
+    tmp = r.getDirection();
+    assert(tmp.x == 1 && tmp.y == 0 && tmp.z == 0);
+    std::cout << "【テスト完了】初期化" << std::endl;
+    
+    // レイ計算式のテスト
+    tmp = r(5);
     assert(tmp.x == 6 && tmp.y == 2 && tmp.z == 3);
     std::cout << "【テスト完了】レイ計算式" << std::endl;
 }
