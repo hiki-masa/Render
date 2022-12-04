@@ -34,11 +34,11 @@ class Image {
         }
 
         // セッタ―
-        void setPixel(int x, int y, const Vec3& c) {
+        void set_pixel(int x, int y, const Vec3& c) {
             data[x][y] = c;
         }
 
-        void setPixel(int x, int y, const double g) {
+        void set_pixel(int x, int y, const double g) {
             data[x][y] = Vec3(g);
         }
 

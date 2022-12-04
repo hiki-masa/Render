@@ -18,16 +18,16 @@ class Ray {
             origin(_origin), direction(_direction.normalize()) {}
 
         // r = o + t * d
-        Vec3 operator()(double t) {
+        Vec3 operator() (double t) const {
             return origin + t * direction;
         }
 
         // ゲッター
-        Vec3 getOrigin() {
+        Vec3 get_origin() const {
             return origin;
         }
 
-        Vec3 getDirection() {
+        Vec3 get_direction() const {
             return direction;
         }
 

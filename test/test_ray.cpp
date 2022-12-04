@@ -10,9 +10,9 @@ int main() {
 
     // コンストラクタのテスト
     Vec3 tmp;
-    tmp = r.getOrigin();
+    tmp = r.get_origin();
     assert(tmp.x == 1 && tmp.y == 2 && tmp.z == 3);
-    tmp = r.getDirection();
+    tmp = r.get_direction();
     assert(tmp.x == 1 && tmp.y == 0 && tmp.z == 0);
     std::cout << "【テスト完了】初期化" << std::endl;
     
