@@ -13,6 +13,7 @@ Vec3 ray_color(const Ray& r) {
 int main() {
     const int image_width  = 640;
     const int image_height = 480;
+    double    aspect_ratio = double(image_width) / image_height;
     Image img(image_width, image_height);
 
     double focal_length    = 1.0;
@@ -24,7 +25,7 @@ int main() {
 
     for (int x = 0; x < image_width; x++) {
         for (int y = 0; y < image_height; y++) {
-            double u = double((2 * x) - image_width)  / image_width;
+            double u = double((2 * x) - image_width)  / image_width * aspect_ratio;
             double v = double((2 * y) - image_height) / image_height;
             Vec3 direction = horizon * u - vertical * v - depth * focal_length;
             Ray r(origin, direction);
@@ -34,5 +35,5 @@ int main() {
         }
     }
 
-    img.save_png("../image/ray.png");
+    img.save_png("../image/pinhole.png");
 }
