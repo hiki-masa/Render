@@ -20,6 +20,13 @@ class Sphere {
 
         Sphere(const Vec3& _center, const double _radius) : center(_center), radius(_radius) {}
 
+        // コンソール出力
+        inline friend std::ostream& operator<<(std::ostream& stream, const Sphere& s) {
+            stream << "center : " << s.center << "\nradius : " << s.radius;
+            return stream;
+        }
+
+        // 与えられたレイとの衝突判定
         bool intersect(const Ray& ray, Hit& res) const {
             double a = 1.0;
             double b = dot(ray.get_direction(), ray.get_origin() - center);
