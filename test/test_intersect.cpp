@@ -12,6 +12,7 @@ int main() {
     assert(h.distance == 4);
     assert(h.hit_position == Vec3(0, 0, -4));
     assert(h.hit_normal == Vec3(0, 0, 1));
+    assert(h.is_outside_sphere == true);
 
     // レイが球と接する場合
     Ray r2(Vec3(1, 0, 0), Vec3(0, 0, -1));
@@ -19,6 +20,7 @@ int main() {
     // assert(h.distance == 5);
     // assert(h.hit_position == Vec3(1, 0, -5));
     // assert(h.hit_normal == Vec3(1, 0, 0));
+    assert(h.is_outside_sphere == true);
 
     // レイと球が衝突しない場合
     Ray r3(Vec3(10, 0, 0), Vec3(0, 0, -1));
@@ -27,4 +29,12 @@ int main() {
     // レイの方向が球と反対方向を向いている場合
     Ray r4(Vec3(0, 0, 0), Vec3(0, 0, 1));
     assert(s.intersect(r4, h) == false);
+
+    // 球内部からのレイと球が衝突する場合
+    Ray r5(Vec3(0, 0, -5), Vec3(0, 0, 1));
+    assert(s.intersect(r5, h) == true);
+    assert(h.distance == 1);
+    assert(h.hit_position == Vec3(0, 0, -4));
+    assert(h.hit_normal == Vec3(0, 0, 1));
+    assert(h.is_outside_sphere == false);
 }

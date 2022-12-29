@@ -6,6 +6,14 @@
 #include "hit.h"
 
 class Sphere {
+    private:
+        bool is_outside(const Ray& r, const Vec3& normal) const {
+            // レイと法線の内積が0以上の場合，レイは内側に存在する
+            if (dot(r.get_direction(), normal) > 0) return false;
+            // レイと法線の内積が0以下の場合，レイは外側に存在する
+            else return true;
+        }
+
     public:
         Vec3 center;
         double radius;
@@ -34,15 +42,15 @@ class Sphere {
                 double d2 = -b + std::sqrt(D);
 
                 // レイの飛ばした逆方向で交差している場合
-                if (d1 < 0 & d2 < 0) return false;
+                if (d1 < 0 && d2 < 0) return false;
 
                 // 交差地点が非常に遠い場合
                 if (d1 > res.MAX_DISTANCE & d2 > res.MAX_DISTANCE) return false;
 
-                if (0 < d1 & d1 < res.MAX_DISTANCE) {
+                if (0 < d1 && d1 < res.MAX_DISTANCE) {
                     distance = d1;
                 }
-                else if (0 < d2 & d2 < res.MAX_DISTANCE) {
+                else if (0 < d2 && d2 < res.MAX_DISTANCE) {
                     distance = d2;
                 }
             }
@@ -50,6 +58,7 @@ class Sphere {
             res.distance     = distance;
             res.hit_position = ray(distance);
             res.hit_normal   = (res.hit_position - center).normalize();
+            res.is_outside_sphere = is_outside(ray, res.hit_normal);
             res.hit_sphere   = this;
 
             return true;

@@ -10,6 +10,7 @@ class Hit {
         double distance;
         Vec3 hit_position;
         Vec3 hit_normal;
+        bool is_outside_sphere;
         const Sphere* hit_sphere;
 
         Hit() {}
