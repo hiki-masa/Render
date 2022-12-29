@@ -21,8 +21,17 @@ int main() {
     assert(v3.normalize().x == 0.6 && v3.normalize().y == 0.8 && v3.normalize().z == 0.0);
     std::cout << "【テスト完了】正規化" << std::endl;
 
-    // マイナスのテスト
+    // イコールのテスト
     Vec3 tmp;
+    tmp = v2;
+    assert((v2 == Vec3(1, 2, 3)) == true);
+    assert((v2 == Vec3(2, 2, 3)) == false);
+    assert((v2 == Vec3(1, 1, 3)) == false);
+    assert((v2 == Vec3(1, 2, 4)) == false);
+    assert((v2 == Vec3(3, 1, 2)) == false);
+    std::cout << "【テスト完了】イコール演算子" << std::endl;
+
+    // マイナスのテスト
     tmp = -v2;
     assert(tmp.x == -1 && tmp.y == -2 && tmp.z == -3);
     std::cout << "【テスト完了】マイナス演算子" << std::endl;

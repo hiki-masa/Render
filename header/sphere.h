@@ -24,7 +24,7 @@ class Sphere {
             if (D < 0) return false;
 
             // D = 0 の場合，接する
-            else if (D = 0) {
+            else if (D == 0) {
                 distance = -b;
             }
 

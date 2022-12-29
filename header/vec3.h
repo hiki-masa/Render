@@ -31,6 +31,12 @@ class Vec3 {
             );
         }
 
+        // イコール演算子
+        inline bool operator== (const Vec3& v) const {
+            if (x == v.x && y == v.y && z == v.z) return true;
+            else return false;
+        }
+
         // マイナス演算
         inline Vec3 operator- () const {
             return Vec3(-x, -y, -z);

@@ -36,7 +36,7 @@ int main() {
             // Vec3 color = (r.get_direction() + 1.0) / 2;
             Vec3 color;
             if (s.intersect(r, res)) {
-                color = Vec3(1, 0, 0);
+                color = (res.hit_normal + 1) / 2;
             }
             else {
                 color = ray_color(r);
