@@ -24,7 +24,7 @@ class Aggregate {
         // 与えられたレイと全ての物体との間で衝突計算を行い，最も手前に存在する物体との衝突情報を返す
         bool intersect(const Ray& ray, Hit& res) const {
             bool hit = false;
-            res.distance = res.MAX_DISTANCE;
+            res.distance = Hit::MAX_DISTANCE;
 
             for (std::shared_ptr<Sphere> s : spheres) {
                 Hit res_temp;

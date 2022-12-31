@@ -66,12 +66,12 @@ class Sphere {
                 if (d1 < 0 && d2 < 0) return false;
 
                 // 交差地点が非常に遠い場合
-                if (d1 > res.MAX_DISTANCE & d2 > res.MAX_DISTANCE) return false;
+                if (d1 > Hit::MAX_DISTANCE & d2 > Hit::MAX_DISTANCE) return false;
 
-                if (0 < d1 && d1 < res.MAX_DISTANCE) {
+                if (0 < d1 && d1 < Hit::MAX_DISTANCE) {
                     distance = d1;
                 }
-                else if (0 < d2 && d2 < res.MAX_DISTANCE) {
+                else if (0 < d2 && d2 < Hit::MAX_DISTANCE) {
                     distance = d2;
                 }
             }

@@ -6,7 +6,8 @@ class Sphere;
 
 class Hit {
     public:
-        double MAX_DISTANCE = 10000.0;
+        static const int MAX_DISTANCE = 10000;
+
         double distance;
         Vec3 hit_position;
         Vec3 hit_normal;

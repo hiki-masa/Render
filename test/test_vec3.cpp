@@ -15,11 +15,14 @@ int main() {
     std::cout << "【テスト完了】３引数初期化" << std::endl;
 
     // 正規化関連のテスト
-    Vec3 v3(3, 4, 0);
+    Vec3 v3;
+    v3 = Vec3(0.1, 0, 0);
+    assert(v3.norm() == 0.1);
+    assert(v3.normalize().x == 1.0 && v3.normalize().y == 0.0 && v3.normalize().z == 0.0);
+    v3 = Vec3(3, 4, 0);
     assert(v3.norm() == 5);
-    std::cout << "【テスト完了】ノルム値計算" << std::endl;
     assert(v3.normalize().x == 0.6 && v3.normalize().y == 0.8 && v3.normalize().z == 0.0);
-    std::cout << "【テスト完了】正規化" << std::endl;
+    std::cout << "【テスト完了】ノルム値計算 + 正規化" << std::endl;
 
     // イコールのテスト
     Vec3 tmp;
