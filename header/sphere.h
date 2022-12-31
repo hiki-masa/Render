@@ -7,6 +7,9 @@
 
 class Sphere {
     private:
+        Vec3 center;
+        double radius;
+
         bool is_outside(const Ray& r, const Vec3& normal) const {
             // レイと法線の内積が0以上の場合，レイは内側に存在する
             if (dot(r.get_direction(), normal) > 0) return false;
@@ -15,15 +18,26 @@ class Sphere {
         }
 
     public:
-        Vec3 center;
-        double radius;
-
-        Sphere(const Vec3& _center, const double _radius) : center(_center), radius(_radius) {}
+        Sphere(const Vec3& _center, const double _radius) : center(_center), radius(_radius) {
+            if (_radius <= 0) {
+                std::cerr << radius_exception().what() << std::endl;
+                throw radius_exception();
+            }
+        }
 
         // コンソール出力
         inline friend std::ostream& operator<<(std::ostream& stream, const Sphere& s) {
             stream << "center : " << s.center << "\nradius : " << s.radius;
             return stream;
+        }
+
+        // ゲッター
+        Vec3 get_center() {
+            return center;
+        }
+
+        double get_radius() {
+            return radius;
         }
 
         // 与えられたレイとの衝突判定
@@ -70,6 +84,14 @@ class Sphere {
 
             return true;
         }
+
+        class radius_exception {
+            private:
+                const char* msg = "The radius of the sphere is set less than or equal to 0";
+            public:
+                radius_exception() {}
+                const char* what() {return msg;}
+        };
 };
 
 #endif
