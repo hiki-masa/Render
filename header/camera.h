@@ -1,8 +1,11 @@
 #ifndef CAMERA_H
 #define CAMERA_H
+#include "util.h"
 #include "vec3.h"
 #include "ray.h"
 #include "image.h"
+#include "hit.h"
+#include "aggregate.h"
 
 
 class Camera {
@@ -49,14 +52,28 @@ class PinholeCamera : private Camera {
         PinholeCamera(const Vec3& _camera_position, const Vec3& _camera_forward, const int image_width, const int image_height, const double _pinhole_distance) :
             Camera(_camera_position, _camera_forward, image_width, image_height), pinhole_distance(_pinhole_distance) {}
 
-        void take_photo() {
+        void take_photo(Aggregate spheres, const int SAMPLE_NUM) {
+            Hit res;
+            Vec3 sun_dir = Vec3(1, 1, 1).normalize();
             for (int x = 0; x < image.get_width(); x++) {
                 for (int y = 0; y < image.get_height(); y++) {
-                    double u = double((2 * x - image.get_width())) / image.get_width();
-                    double v = double((image.get_height() - 2 * y)) / image.get_height();
-                    Ray r = calc_ray(u, v);
+                    Vec3 color;
+                    for (int n = 0; n < SAMPLE_NUM; n++) {
+                        double u = double((2 * (x + rnd(-0.5, 0.5)) - image.get_width())) / image.get_width();
+                        double v = double((image.get_height() - 2 * (y + rnd(-0.5, 0.5)))) / image.get_height();
+                        Ray r = calc_ray(u, v);
 
-                    Vec3 color = (r.get_direction() + 1.0) / 2;
+                        if (spheres.intersect(r, res)) {
+                            // color += (res.hit_normal + 1) / 2;
+                            
+                            Ray shadow_ray(res.hit_position, sun_dir);
+                            Hit res_temp;
+                            if (!spheres.intersect(shadow_ray, res_temp)) {
+                                color += Vec3(std::max(0.0, dot(res.hit_normal, sun_dir)));
+                            }
+                        }
+                    }
+                    color /= SAMPLE_NUM;
                     image.set_pixel(x, y, color);
                 }
             }
