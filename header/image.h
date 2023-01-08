@@ -18,6 +18,7 @@ class Image {
 
     public:
         // コンストラクタ
+        Image() {}
         Image(int _width, int _height) : width(_width), height(_height) {
             data = new Vec3*[width];
             for (int x = 0; x < width; x++) {
@@ -27,10 +28,11 @@ class Image {
 
         // デストラクタ
         ~Image() {
-            for (int x = 0; x < width; x++) {
-                delete[] data[x];
-            }
-            delete[] data;
+            // TODO: 引数無しコンストラクタで作成したインスタンスを削除する際，Segmentation faultバグが発生する
+            // for (int x = 0; x < width; x++) {
+            //     delete[] data[x];
+            // }
+            // delete[] data;
         }
 
         // セッタ―
@@ -41,6 +43,10 @@ class Image {
         void set_pixel(int x, int y, const double g) {
             data[x][y] = Vec3(g);
         }
+
+        // ゲッター
+        int get_width() {return width;}
+        int get_height() {return height;}
 
         // ガンマ補正
         void gamma_correction() {
