@@ -37,8 +37,8 @@ int main() {
             Vec3 color;
             for (int n = 0; n < SAMPLE_NUM; n++) {
                 double u = double((2 * (x + rnd(-0.5, 0.5))) - image_width ) / image_width * aspect_ratio;
-                double v = double((2 * (y + rnd(-0.5, 0.5))) - image_height) / image_height;
-                Vec3 direction = horizon * u - vertical * v - depth * focal_length;
+                double v = double(image_height - (2 * (y + rnd(-0.5, 0.5)))) / image_height;
+                Vec3 direction = horizon * u + vertical * v - depth * focal_length;
                 Ray r(origin, direction);
 
                 if (aggregate.intersect(r, res)) {

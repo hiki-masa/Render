@@ -30,8 +30,8 @@ int main() {
     for (int x = 0; x < image_width; x++) {
         for (int y = 0; y < image_height; y++) {
             double u = double((2 * x) - image_width)  / image_width * aspect_ratio;
-            double v = double((2 * y) - image_height) / image_height;
-            Vec3 direction = horizon * u - vertical * v - depth * focal_length;
+            double v = double(image_height - (2 * y)) / image_height;
+            Vec3 direction = horizon * u + vertical * v - depth * focal_length;
             Ray r(origin, direction);
             // Vec3 color = (r.get_direction() + 1.0) / 2;
             Vec3 color;
